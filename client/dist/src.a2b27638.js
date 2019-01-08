@@ -9643,16 +9643,28 @@ var _socket = _interopRequireDefault(require("socket.io-client"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //! this is the client index.js
+var info = document.querySelector('.info');
 var API_URL = 'http://localhost:5000';
 
 var socket = _socket.default.connect(API_URL);
 
 socket.on('connect', function (data) {
-  socket.on('message-client-connected', function (data) {
-    console.log(data);
+  console.log('client connected!');
+});
+socket.on('message-client-connected', function (data) {
+  info.textContent = data;
+});
+socket.on('mousemove', function (data) {
+  console.log(data);
+});
+document.addEventListener('mousemove', function (event) {
+  var x = event.clientX;
+  var y = event.clientY;
+  socket.emit('mousemove', {
+    x: x,
+    y: y
   });
 });
-console.log('connected!');
 },{"socket.io-client":"node_modules/socket.io-client/lib/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

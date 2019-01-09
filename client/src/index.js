@@ -9,8 +9,10 @@ socket.on('connect', (data) => {
 socket.on('message-client-connected', function(data) {
   info.textContent = data;
 });
-socket.on('mousemove', (data) => {
-  console.log(data);
+socket.on('mousemove', (event) => {
+  if (socket.id !== event.id) {
+    console.log(event);
+  }
 });
 document.addEventListener('mousemove', (event) => {
   const x = event.clientX;

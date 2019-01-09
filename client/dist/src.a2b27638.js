@@ -9654,8 +9654,10 @@ socket.on('connect', function (data) {
 socket.on('message-client-connected', function (data) {
   info.textContent = data;
 });
-socket.on('mousemove', function (data) {
-  console.log(data);
+socket.on('mousemove', function (event) {
+  if (socket.id !== event.id) {
+    console.log(event);
+  }
 });
 document.addEventListener('mousemove', function (event) {
   var x = event.clientX;
@@ -9692,7 +9694,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61656" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52550" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
